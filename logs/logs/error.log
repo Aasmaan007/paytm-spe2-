@@ -1,0 +1,12 @@
+{"error":"Cast to ObjectId failed for value \"validUserId\" (type string) at path \"userId\" for model \"Account\"","level":"error","message":"Error retrieving account balance","timestamp":"2024-11-27T12:49:40.604Z"}
+{"error":"Cast to ObjectId failed for value \"validUserId\" (type string) at path \"userId\" for model \"Account\"","level":"error","message":"Error during fund transfer","timestamp":"2024-11-27T12:49:40.611Z"}
+{"error":"Cast to ObjectId failed for value \"validUserId\" (type string) at path \"userId\" for model \"Account\"","level":"error","message":"Error during fund transfer","timestamp":"2024-11-27T12:49:40.616Z"}
+{"error":"Cast to ObjectId failed for value \"validUserId\" (type string) at path \"userId\" for model \"Account\"","level":"error","message":"Error during fund transfer","timestamp":"2024-11-27T12:49:40.620Z"}
+{"error":"Cast to ObjectId failed for value \"validUserId\" (type string) at path \"userId\" for model \"Account\"","level":"error","message":"Error retrieving account balance","timestamp":"2024-11-27T12:51:51.930Z"}
+{"error":"Cast to ObjectId failed for value \"validUserId\" (type string) at path \"userId\" for model \"Account\"","level":"error","message":"Error during fund transfer","timestamp":"2024-11-27T12:51:51.936Z"}
+{"error":"Cast to ObjectId failed for value \"validUserId\" (type string) at path \"userId\" for model \"Account\"","level":"error","message":"Error during fund transfer","timestamp":"2024-11-27T12:51:51.940Z"}
+{"error":"Cast to ObjectId failed for value \"validUserId\" (type string) at path \"userId\" for model \"Account\"","level":"error","message":"Error during fund transfer","timestamp":"2024-11-27T12:51:51.944Z"}
+{"error":"Cast to ObjectId failed for value \"invalidUserId\" (type string) at path \"userId\" for model \"Account\"","level":"error","message":"Error during fund transfer","timestamp":"2024-11-27T13:08:49.897Z"}
+{"error":"Cast to ObjectId failed for value \"invalidUserId\" (type string) at path \"userId\" for model \"Account\"","level":"error","message":"Error during fund transfer","timestamp":"2024-11-27T13:10:59.665Z"}
+{"error":"Cast to ObjectId failed for value \"invalidUserId\" (type string) at path \"userId\" for model \"Account\"","level":"error","message":"Error during fund transfer","timestamp":"2024-11-27T13:15:03.574Z"}
+{"error":"Cast to ObjectId failed for value \"invalidUserId\" (type string) at path \"userId\" for model \"Account\"","level":"error","message":"Error during fund transfer","timestamp":"2024-11-27T13:18:21.233Z"}
