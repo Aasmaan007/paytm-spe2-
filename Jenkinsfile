@@ -3,11 +3,13 @@ pipeline {
         backend = 'backend'  // Backend Docker image name
         frontend = 'frontend'  // Frontend Docker image name
         VAULT_PASSWORD = 'aasmaan' // Jenkins secret for the Ansible vault password
+        KUBECONFIG = './k8s/kubectl-config' // Path to Kubernetes kubeconfig file
     }
 
     agent any
 
     stages {
+        // Clone the repository
         stage('Clone Repository') {
             steps {
                 echo 'Cloning the Git repository...'
@@ -15,41 +17,21 @@ pipeline {
             }
         }
 
+        // Run tests for the backend
         stage('Testing') {
             steps {
                 echo 'Running tests...'
                 script {
-                    // Navigate to the backend directory
                     dir('backend') {
-                        // Install dependencies
+                        // Install dependencies and run tests
                         sh 'npm install'
-
-                        // Run tests
                         sh 'npm test'
                     }
                 }
             }
         }
-        
-        stage('Stop and Remove Containers') {
-            steps {
-                echo 'Stopping and removing all Docker containers...'
-                script {
-                    // Get all container IDs (running or stopped)
-                    def containerIds = sh(script: "sudo docker ps -aq", returnStdout: true).trim()
-            
-                    // Only stop and remove containers if there are any
-                    if (containerIds) {
-                        echo "Stopping and removing containers: ${containerIds}"
-                        sh "sudo docker stop \$(sudo docker ps -aq)"  // Stop all containers (escaped $)
-                        sh "sudo docker rm \$(sudo docker ps -aq)"    // Remove all containers (escaped $)
-                    } else {
-                        echo 'No containers found. Skipping stop and remove steps.'
-                    }
-                }
-            }
-        }
 
+        // Build Docker images for backend and frontend
         stage('Build Docker Images') {
             steps {
                 echo 'Building Docker images...'
@@ -63,38 +45,69 @@ pipeline {
             }
         }
 
+        // Push Docker images to Docker Hub
         stage('Push Docker Images') {
             steps {
                 echo 'Pushing Docker images to Docker Hub...'
                 script {
-                    // Push Backend Docker Image to Docker Hub
                     docker.withRegistry('', 'DockerHubCred') {
                         backend_image.push()
-                    }
-
-                    // Push Frontend Docker Image to Docker Hub
-                    docker.withRegistry('', 'DockerHubCred') {
                         frontend_image.push()
                     }
                 }
             }
         }
 
-        stage('Deploy with Ansible') {
+        // Setup kubeconfig for Kubernetes access
+        stage('Set up Kubernetes Config') {
             steps {
-                echo 'Running Ansible playbook for deployment...'
+                echo 'Setting up Kubernetes configuration...'
                 script {
-                    // Create temporary file for vault password
-                    writeFile file: '/tmp/vault_password.txt', text: "${env.VAULT_PASSWORD}"
+                    sh 'mkdir -p $HOME/.kube'
+                    sh "cp ${env.KUBECONFIG} $HOME/.kube/config"
                 }
-                ansiblePlaybook(
-                    playbook: 'Deployment/deploy.yml',
-                    inventory: 'Deployment/inventory',
-                    extras: "--vault-password-file /tmp/vault_password.txt",  // Use the temporary password file
-                    credentialsId: 'localhost',
-                    disableHostKeyChecking: true
-                )
             }
+        }
+
+        // Deploy to Kubernetes using kubectl
+        stage('Deploy to Kubernetes') {
+            steps {
+                echo 'Deploying to Kubernetes...'
+                script {
+                    // Apply backend and frontend Kubernetes manifests
+                    sh 'kubectl apply -f k8s/deployment/backend-deployment.yml'
+                    sh 'kubectl apply -f k8s/deployment/frontend-deployment.yml'
+
+                    // Rollout status for deployments
+                    sh 'kubectl rollout status deployment/backend-deployment'
+                    sh 'kubectl rollout status deployment/frontend-deployment'
+                }
+            }
+        }
+
+        // Post-deployment checks (Optional)
+        stage('Verify Deployment') {
+            steps {
+                echo 'Verifying deployment...'
+                script {
+                    // Check the status of all pods
+                    sh 'kubectl get pods'
+                    // Optional: Check services
+                    sh 'kubectl get services'
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            echo 'Pipeline finished.'
+        }
+        success {
+            echo 'Deployment succeeded!'
+        }
+        failure {
+            echo 'Pipeline failed.'
         }
     }
 }
