@@ -11,7 +11,23 @@ pipeline {
         stage('Clone Repository') {
             steps {
                 echo 'Cloning the Git repository...'
-                git branch: 'master', url: 'https://github.com/Aasmaan007/paytm-spe2-.git'
+                git branch: 'tests', url: 'https://github.com/Aasmaan007/paytm-spe2-.git'
+            }
+        }
+
+        stage('Testing') {
+            steps {
+                echo 'Running tests...'
+                script {
+                    // Navigate to the backend directory
+                    dir('backend') {
+                        // Install dependencies
+                        sh 'npm install'
+
+                        // Run tests
+                        sh 'npm test'
+                    }
+                }
             }
         }
         
@@ -63,9 +79,6 @@ pipeline {
                 }
             }
         }
-
-        
-
 
         stage('Deploy with Ansible') {
             steps {
