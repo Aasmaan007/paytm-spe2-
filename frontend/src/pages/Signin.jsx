@@ -49,7 +49,7 @@ export const Signin = () => {
               onClick={async () => {
                 console.log("hehe")
                 const response = await axios.post(
-                  "http://backend-service:3000" + "/api/v1/user/signin",
+                  "http://backend-service.default.svc.cluster.local:3000" + "/api/v1/user/signin",
                   {
                     username,
                     password,
