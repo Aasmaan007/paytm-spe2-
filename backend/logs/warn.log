@@ -31,3 +31,4 @@
 {"level":"warn","message":"User not found","timestamp":"2024-12-10T10:40:12.349Z","userId":"6757fb8ddb88f80c8c0241de"}
 {"level":"warn","message":"User not found","timestamp":"2024-12-10T10:40:12.375Z","userId":"6757fb8ddb88f80c8c0241de"}
 {"level":"warn","message":"Invalid signin attempt","timestamp":"2024-12-10T10:40:25.402Z","username":"aasmaan@gmail.com"}
+{"level":"warn","message":"Attempt to signup with existing email","timestamp":"2024-12-10T11:13:54.228Z","username":"testuser@example.com"}

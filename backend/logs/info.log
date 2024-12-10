@@ -138,3 +138,6 @@
 {"level":"info","message":"User retrieved successfully","timestamp":"2024-12-10T10:41:24.020Z","userId":"67581abdeeaecfd3464d2cef"}
 {"balance":7111.136337203407,"level":"info","message":"Account balance retrieved","timestamp":"2024-12-10T10:41:24.021Z","userId":"67581abdeeaecfd3464d2cef"}
 {"balance":7111.136337203407,"level":"info","message":"Account balance retrieved","timestamp":"2024-12-10T10:41:24.022Z","userId":"67581abdeeaecfd3464d2cef"}
+{"level":"info","message":"User created successfully","timestamp":"2024-12-10T11:13:53.699Z","userId":"67582271481d3a0a77bd1e3a","username":"testuser@example.com"}
+{"level":"info","message":"Signin successful","timestamp":"2024-12-10T11:13:54.098Z","userId":"67582271481d3a0a77bd1e3f","username":"testuser@example.com"}
+{"level":"warn","message":"Attempt to signup with existing email","timestamp":"2024-12-10T11:13:54.228Z","username":"testuser@example.com"}
