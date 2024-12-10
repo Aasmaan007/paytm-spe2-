@@ -27,3 +27,7 @@
 {"error":"Cast to ObjectId failed for value \"invalidUserId\" (type string) at path \"userId\" for model \"Account\"","level":"error","message":"Error during fund transfer","timestamp":"2024-11-27T13:18:21.233Z"}
 {"email":"validUser@gmail.com","level":"warn","message":"Signup attempt with existing email","timestamp":"2024-11-27T13:20:13.281Z"}
 {"amount":1000000,"level":"warn","message":"Insufficient balance or account not found","timestamp":"2024-11-27T13:20:13.459Z","userId":"67471c8df0cac6df969837d3"}
+{"level":"warn","message":"Attempt to signup with existing email","timestamp":"2024-12-10T10:35:46.497Z","username":"testuser@example.com"}
+{"level":"warn","message":"User not found","timestamp":"2024-12-10T10:40:12.349Z","userId":"6757fb8ddb88f80c8c0241de"}
+{"level":"warn","message":"User not found","timestamp":"2024-12-10T10:40:12.375Z","userId":"6757fb8ddb88f80c8c0241de"}
+{"level":"warn","message":"Invalid signin attempt","timestamp":"2024-12-10T10:40:25.402Z","username":"aasmaan@gmail.com"}
