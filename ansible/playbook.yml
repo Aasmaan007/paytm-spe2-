@@ -1,6 +1,9 @@
+# ansible/playbook.yml
 ---
 - name: Deploy application to Kubernetes
   hosts: localhost
+  vars_files:
+    - /home/aasmaan/Desktop/WebDevH/paytmk8/ansible/secrets.yml  # Path to encrypted secrets.yml
   roles:
     - backend
     - frontend

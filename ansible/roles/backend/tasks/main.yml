@@ -1,5 +1,26 @@
 ---
+# Backend role tasks
+
+# Step 1: Decrypt MongoDB URI using Ansible Vault
+- name: Decrypt MongoDB URI from secrets.yml
+  ansible.builtin.include_vars:
+    file: "/home/aasmaan/Desktop/WebDevH/paytmk8/ansible/secrets.yml"
+    name: secrets
+  no_log: true  # Ensure sensitive data is not logged
+
+# Step 2: Create backend environment file dynamically with MongoDB URI
+- name: Create backend environment file dynamically
+  shell: |
+    echo "MONGO_URI={{ secrets.db_url }}" > /home/aasmaan/Desktop/WebDevH/paytmk8/backend/.env
+  args:
+    chdir: "{{ playbook_dir }}"  # Ensure correct directory is used to run the shell command
+  become: true  # Optionally run as root if needed
+  no_log: true  # To avoid logging sensitive data
+
+# Step 3: Apply the Backend Kubernetes deployment manifest
 - name: Apply Backend Kubernetes deployment manifest
   shell: |
     kubectl apply -f /home/aasmaan/Desktop/WebDevH/paytmk8/k8s/deployment/backend-deployment.yml
     kubectl rollout status deployment/backend-deployment --kubeconfig /home/aasmaan/Desktop/WebDevH/paytmk8/k8s/kubectl-config
+  become: true  # Run as root if required by Kubernetes
+  no_log: false  # Logs will be visible to monitor the status
