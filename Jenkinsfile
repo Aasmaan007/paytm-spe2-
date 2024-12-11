@@ -16,6 +16,18 @@ pipeline {
             }
         }
 
+        // Remove existing Docker images
+        stage('Remove Existing Docker Images') {
+            steps {
+                echo 'Removing existing Docker images (aasmaan1/frontend and aasmaan1/backend)...'
+                script {
+                    // Remove existing frontend and backend images if they exist
+                    sh 'docker rmi -f aasmaan1/frontend:latest || true'
+                    sh 'docker rmi -f aasmaan1/backend:latest || true'
+                }
+            }
+        }
+
         // Build Docker images using Docker Compose
         stage('Build Docker Images') {
             steps {
