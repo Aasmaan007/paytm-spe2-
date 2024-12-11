@@ -60,6 +60,7 @@ export const Signup = () => {
           <div className="pt-4">
             <Button
               onClick={async () => {
+                console.log("REACT_APP_BACKEND_URL:", process.env.REACT_APP_BACKEND_URL);
                 const backendurl = process.env.REACT_APP_BACKEND_URL || "http://localhost:3000";  // Use environment variable or fallback
                 const response = await axios.post(
                   backendurl + "/api/v1/user/signup",

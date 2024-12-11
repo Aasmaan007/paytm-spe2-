@@ -13,12 +13,14 @@ RUN npm install
 # Copy all project files
 COPY . .
 
-# Set the environment variable for build time
 # Accept build argument for REACT_APP_BACKEND_URL
 ARG REACT_APP_BACKEND_URL
 
-# Make the build argument available as an environment variable
-ENV REACT_APP_BACKEND_URL=$REACT_APP_BACKEND_URL 
+# Print the environment variable during build for debugging
+RUN echo "Building with REACT_APP_BACKEND_URL=$REACT_APP_BACKEND_URL"
+
+# Set the environment variable for the React app
+ENV REACT_APP_BACKEND_URL=$REACT_APP_BACKEND_URL
 
 # Build the app
 RUN npm run build
