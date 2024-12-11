@@ -3,7 +3,7 @@ require('dotenv').config();
 
 const connectToDatabase = async () => {
     try {
-        const mongoURI = process.env.MONGO_URI || "mongodb+srv://admin:iQSZvFQqxVmMeO8o@cluster0.3bg9h.mongodb.net/paytm"; // Fetch MongoDB URI from .envconst mongoURI = mongodb+srv://admin:iQSZvFQqxVmMeO8o@cluster0.mongodb.net/paytm
+        const mongoURI = "mongodb+srv://admin:iQSZvFQqxVmMeO8o@cluster0.3bg9h.mongodb.net/paytm"; // Fetch MongoDB URI from .envconst mongoURI = mongodb+srv://admin:iQSZvFQqxVmMeO8o@cluster0.mongodb.net/paytm
         // const mongoURI = "mongodb+srv://admin:iQSZvFQqxVmMeO8o@cluster0.3bg9h.mongodb.net/paytm"
         console.log(mongoURI)
         if (!mongoURI) {

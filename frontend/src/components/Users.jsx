@@ -8,7 +8,7 @@ export const Users = () => {
   const [filter, setFilter] = useState("");
 
   useEffect(() => {
-    const backendurl = process.env.REACT_APP_BACKEND_URL || "http://localhost:3000"; 
+    const backendurl = import.meta.env.REACT_APP_BACKEND_URL || "http://192.168.49.2:30847"; 
     axios
       .get(
         backendurl + "/api/v1/user/bulk?filter=" + filter

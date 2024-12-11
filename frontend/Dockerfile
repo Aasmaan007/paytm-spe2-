@@ -14,13 +14,13 @@ RUN npm install
 COPY . .
 
 # Accept build argument for REACT_APP_BACKEND_URL
-ARG REACT_APP_BACKEND_URL
+# ARG REACT_APP_BACKEND_URL
 
 # Print the environment variable during build for debugging
-RUN echo "Building with REACT_APP_BACKEND_URL=$REACT_APP_BACKEND_URL"
+# RUN echo "Building with REACT_APP_BACKEND_URL=$REACT_APP_BACKEND_URL"
 
 # Build the app with the environment variable explicitly passed
-RUN REACT_APP_BACKEND_URL=$REACT_APP_BACKEND_URL npm run build
+RUN  npm run build
 
 # Stage 2: Serve with Nginx
 FROM nginx:stable-alpine
