@@ -47,9 +47,10 @@ export const Signin = () => {
           <div className="pt-4">
             <Button
               onClick={async () => {
-                console.log("hehe")
+                // console.log("hehe")
+                const backendurl = process.env.REACT_APP_BACKEND_URL || "http://localhost:3000"; 
                 const response = await axios.post(
-                  "http://backend-service.default.svc.cluster.local:3000" + "/api/v1/user/signin",
+                  backendurl + "/api/v1/user/signin",
                   {
                     username,
                     password,

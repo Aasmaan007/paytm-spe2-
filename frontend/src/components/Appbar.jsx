@@ -14,8 +14,8 @@ export const Appbar = () => {
     if (!userToken) {
       navigate("/signin"); // Redirect to sign-in page if token doesn't exist
     } else {
-      axios
-        .get("http://backend-service:3000" + "/api/v1/user/getUser", {
+      const backendurl = process.env.REACT_APP_BACKEND_URL || "http://localhost:3000"; 
+      axios.get(backendurl + "/api/v1/user/getUser", {
           headers: {
             Authorization: "Bearer " + localStorage.getItem("token"),
           },

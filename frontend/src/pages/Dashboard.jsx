@@ -17,8 +17,9 @@ export const Dashboard = () => {
       navigate("/signin"); // Redirect to sign-in page if token doesn't exist
     } else {
       // Fetch balance if token exists
+      const backendurl = process.env.REACT_APP_BACKEND_URL || "http://localhost:3000"; 
       axios
-        .get("http://backend-service.default.svc.cluster.local:3000" + "/api/v1/account/balance", {
+        .get(backendurl + "/api/v1/account/balance", {
           headers: {
             Authorization: "Bearer " + userToken,
           },

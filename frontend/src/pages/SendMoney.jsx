@@ -67,8 +67,9 @@ export const SendMoney = () => {
               <button
                 onClick={async () => {
                   try {
+                    const backendurl = process.env.REACT_APP_BACKEND_URL || "http://localhost:3000"; 
                     const res = await axios.post(
-                      "http://backend-service.default.svc.cluster.local:3000" + "/api/v1/account/transfer",
+                      backendurl + "/api/v1/account/transfer",
                       {
                         to: id,
                         amount,

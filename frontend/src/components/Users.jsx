@@ -8,9 +8,10 @@ export const Users = () => {
   const [filter, setFilter] = useState("");
 
   useEffect(() => {
+    const backendurl = process.env.REACT_APP_BACKEND_URL || "http://localhost:3000"; 
     axios
       .get(
-        "http://backend-service.default.svc.cluster.local:3000" + "/api/v1/user/bulk?filter=" + filter
+        backendurl + "/api/v1/user/bulk?filter=" + filter
       )
       .then((response) => {
         setUsers(response.data.user);
