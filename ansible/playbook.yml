@@ -1,4 +1,13 @@
-- name: Apply Kubernetes deployment manifest
-  shell: |
-    kubectl apply -f /home/aasmaan/Desktop/WebDevH/paytmk8/k8s/deployment/{{ deployment }}-deployment.yml
-    kubectl rollout status deployment/{{ deployment }}-deployment --kubeconfig /home/aasmaan/Desktop/WebDevH/paytmk8/k8s/kubectl-config
+---
+- name: Deploy application to Kubernetes
+  hosts: localhost
+  tasks:
+    - name: Apply Backend Kubernetes deployment manifest
+      shell: |
+        kubectl apply -f /home/aasmaan/Desktop/WebDevH/paytmk8/k8s/deployment/backend-deployment.yml
+        kubectl rollout status deployment/backend-deployment --kubeconfig /home/aasmaan/Desktop/WebDevH/paytmk8/k8s/kubectl-config
+
+    - name: Apply Frontend Kubernetes deployment manifest
+      shell: |
+        kubectl apply -f /home/aasmaan/Desktop/WebDevH/paytmk8/k8s/deployment/frontend-deployment.yml
+        kubectl rollout status deployment/frontend-deployment --kubeconfig /home/aasmaan/Desktop/WebDevH/paytmk8/k8s/kubectl-config

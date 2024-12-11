@@ -1,6 +1,6 @@
 pipeline {
     environment {
-        VAULT_PASSWORD = 'aasmaan' // Jenkins secret for Ansible vault password
+        VAULT_PASSWORD = 'aasmaan' // Jenkins secret for the Ansible vault password
         KUBECONFIG = './k8s/kubectl-config' // Path to Kubernetes kubeconfig file
         MINIKUBE_IP = '192.168.49.2' // Hardcoded Minikube IP
     }
@@ -16,25 +16,12 @@ pipeline {
             }
         }
 
-        // Remove existing Docker images
-        stage('Remove Existing Docker Images') {
+        // Build Docker image for the backend
+        stage('Build Backend Docker Image') {
             steps {
-                echo 'Removing existing Docker images (aasmaan1/frontend and aasmaan1/backend)...'
+                echo 'Building Backend Docker image...'
                 script {
-                    // Remove existing frontend and backend images if they exist
-                    sh 'docker rmi -f aasmaan1/frontend:latest || true'
-                    sh 'docker rmi -f aasmaan1/backend:latest || true'
-                }
-            }
-        }
-
-        // Build Docker images using Docker Compose
-        stage('Build Docker Images') {
-            steps {
-                echo 'Building Docker images using Docker Compose...'
-                script {
-                    // Build images for both frontend and backend using Docker Compose
-                    sh 'docker-compose -f docker-compose.yml build'
+                    backend_image = docker.build("aasmaan1/backend:latest", "./backend")
                 }
             }
         }
@@ -45,8 +32,18 @@ pipeline {
                 echo 'Pushing Backend Docker image to Docker Hub...'
                 script {
                     docker.withRegistry('', 'DockerHubCred') {
-                        sh 'docker push aasmaan1/backend:latest'
+                        backend_image.push()
                     }
+                }
+            }
+        }
+
+        // Build Docker image for the frontend and pass backend URL at build time
+        stage('Build Frontend Docker Image') {
+            steps {
+                echo 'Building Frontend Docker image...'
+                script {
+                    frontend_image = docker.build("aasmaan1/frontend:latest", "./frontend")
                 }
             }
         }
@@ -57,30 +54,18 @@ pipeline {
                 echo 'Pushing Frontend Docker image to Docker Hub...'
                 script {
                     docker.withRegistry('', 'DockerHubCred') {
-                        sh 'docker push aasmaan1/frontend:latest'
+                        frontend_image.push()
                     }
                 }
             }
         }
 
-        // Deploy Backend to Kubernetes using Ansible
-        stage('Deploy Backend to Kubernetes') {
+        // Deploy both Frontend and Backend to Kubernetes using Ansible playbook
+        stage('Deploy to Kubernetes') {
             steps {
-                echo 'Deploying Backend to Kubernetes using Ansible...'
+                echo 'Deploying Frontend and Backend to Kubernetes...'
                 script {
-                    // Run Ansible playbook to deploy backend
-                    sh 'ansible-playbook -i ansible/inventory.ini ansible/playbook.yml --extra-vars "deployment=backend"'
-                }
-            }
-        }
-
-        // Deploy Frontend to Kubernetes using Ansible
-        stage('Deploy Frontend to Kubernetes') {
-            steps {
-                echo 'Deploying Frontend to Kubernetes using Ansible...'
-                script {
-                    // Run Ansible playbook to deploy frontend
-                    sh 'ansible-playbook -i ansible/inventory.ini ansible/playbook.yml --extra-vars "deployment=frontend"'
+                    sh 'ansible-playbook -i ansible/inventory.ini ansible/playbook.yml'
                 }
             }
         }
