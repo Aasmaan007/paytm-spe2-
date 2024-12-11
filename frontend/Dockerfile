@@ -10,13 +10,15 @@ COPY package*.json ./
 # Install dependencies
 RUN npm install
 
-# Copy all project files (including .env if necessary)
+# Copy all project files
 COPY . .
 
 # Set the environment variable for build time
-# This will allow React to use the correct backend URL during the build
+# Accept build argument for REACT_APP_BACKEND_URL
 ARG REACT_APP_BACKEND_URL
-ENV REACT_APP_BACKEND_URL=${REACT_APP_BACKEND_URL}  # This makes it available to React
+
+# Make the build argument available as an environment variable
+ENV REACT_APP_BACKEND_URL=$REACT_APP_BACKEND_URL  # Use the correct syntax
 
 # Build the app
 RUN npm run build
