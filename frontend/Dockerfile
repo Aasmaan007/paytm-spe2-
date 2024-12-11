@@ -18,7 +18,7 @@ COPY . .
 ARG REACT_APP_BACKEND_URL
 
 # Make the build argument available as an environment variable
-ENV REACT_APP_BACKEND_URL=$REACT_APP_BACKEND_URL  # Use the correct syntax
+ENV REACT_APP_BACKEND_URL=$REACT_APP_BACKEND_URL 
 
 # Build the app
 RUN npm run build
