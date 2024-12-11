@@ -4,7 +4,6 @@ FROM node:16 as build
 # Set the working directory
 WORKDIR /app
 
-
 # Copy package.json and package-lock.json
 COPY package*.json ./
 
@@ -16,8 +15,10 @@ COPY . .
 
 # Set the environment variable for build time
 # This will allow React to use the correct backend URL during the build
+ARG REACT_APP_BACKEND_URL
+ENV REACT_APP_BACKEND_URL=${REACT_APP_BACKEND_URL}  # This makes it available to React
 
-# Build the app (using the .env file copied earlier)
+# Build the app
 RUN npm run build
 
 # Stage 2: Serve with Nginx
