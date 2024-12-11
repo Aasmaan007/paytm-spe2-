@@ -1,0 +1,5 @@
+---
+- name: Apply Backend Kubernetes deployment manifest
+  shell: |
+    kubectl apply -f /home/aasmaan/Desktop/WebDevH/paytmk8/k8s/deployment/backend-deployment.yml
+    kubectl rollout status deployment/backend-deployment --kubeconfig /home/aasmaan/Desktop/WebDevH/paytmk8/k8s/kubectl-config
