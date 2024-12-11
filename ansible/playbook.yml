@@ -1,0 +1,8 @@
+---
+- name: Deploy application to Kubernetes
+  hosts: localhost
+  tasks:
+    - name: Apply Kubernetes deployment manifest
+      shell: |
+        kubectl apply -f k8s/deployment/{{ deployment }}-deployment.yml
+        kubectl rollout status deployment/{{ deployment }}-deployment

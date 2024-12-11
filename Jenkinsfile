@@ -1,8 +1,6 @@
 pipeline {
     environment {
-        backend = 'backend'  // Backend Docker image name
-        frontend = 'frontend'  // Frontend Docker image name
-        VAULT_PASSWORD = 'aasmaan' // Jenkins secret for the Ansible vault password
+        VAULT_PASSWORD = 'aasmaan' // Jenkins secret for Ansible vault password
         KUBECONFIG = './k8s/kubectl-config' // Path to Kubernetes kubeconfig file
         MINIKUBE_IP = '192.168.49.2' // Hardcoded Minikube IP
     }
@@ -18,27 +16,13 @@ pipeline {
             }
         }
 
-        // Run tests for the backend
-        stage('Testing') {
+        // Build Docker images using Docker Compose
+        stage('Build Docker Images') {
             steps {
-                echo 'Running tests...'
+                echo 'Building Docker images using Docker Compose...'
                 script {
-                    dir('backend') {
-                        // Install dependencies and run tests
-                        sh 'npm install'
-                        sh 'npm test'
-                    }
-                }
-            }
-        }
-
-        // Build Docker image for the backend
-        stage('Build Backend Docker Image') {
-            steps {
-                echo 'Building Backend Docker image...'
-                script {
-                    // Build Backend Docker Image
-                    backend_image = docker.build("aasmaan1/backend:latest", "./backend")
+                    // Build images for both frontend and backend using Docker Compose
+                    sh 'docker-compose -f docker-compose.yml build'
                 }
             }
         }
@@ -49,52 +33,8 @@ pipeline {
                 echo 'Pushing Backend Docker image to Docker Hub...'
                 script {
                     docker.withRegistry('', 'DockerHubCred') {
-                        backend_image.push()
+                        sh 'docker push aasmaan1/backend:latest'
                     }
-                }
-            }
-        }
-
-        // Deploy Backend to Kubernetes
-        stage('Deploy Backend to Kubernetes') {
-            steps {
-                echo 'Deploying Backend to Kubernetes...'
-                script {
-                    // Apply backend Kubernetes manifest
-                    sh 'kubectl apply -f k8s/deployment/backend-deployment.yml'
-                    
-                    // Rollout status for backend deployment
-                    sh 'kubectl rollout status deployment/backend-deployment'
-                }
-            }
-        }
-
-        // Get Backend NodePort
-        stage('Get Backend NodePort') {
-            steps {
-                script {
-                    // Get the backend service NodePort
-                    def backendNodePort = sh(script: "kubectl get svc backend-service -o=jsonpath='{.spec.ports[0].nodePort}'", returnStdout: true).trim()
-                    echo "Backend NodePort: ${backendNodePort}"
-
-                    // Create a ConfigMap for frontend with the backend URL
-                    def backendUrl = "http://${env.MINIKUBE_IP}:${backendNodePort}"
-                    echo "Setting frontend ConfigMap with backend URL: ${backendUrl}"
-                    sh """
-                    kubectl create configmap frontend-config --from-literal=REACT_APP_BACKEND_URL=${backendUrl} --dry-run=client -o yaml | kubectl apply -f -
-                    """
-                }
-            }
-        }
-
-        // Build Docker image for the frontend and pass backend URL at build time
-        stage('Build Frontend Docker Image') {
-            steps {
-                echo 'Building Frontend Docker image...'
-                script {
-                    // Build Frontend Docker Image with the backend URL passed as an argument
-                    frontend_image = docker.build("aasmaan1/frontend:latest", 
-                        "--build-arg REACT_APP_BACKEND_URL=http://${env.MINIKUBE_IP}:${backendNodePort} ./frontend")
                 }
             }
         }
@@ -105,49 +45,32 @@ pipeline {
                 echo 'Pushing Frontend Docker image to Docker Hub...'
                 script {
                     docker.withRegistry('', 'DockerHubCred') {
-                        frontend_image.push()
+                        sh 'docker push aasmaan1/frontend:latest'
                     }
                 }
             }
         }
 
-        // Deploy Frontend to Kubernetes using the updated backend URL
+        // Deploy Backend to Kubernetes using Ansible
+        stage('Deploy Backend to Kubernetes') {
+            steps {
+                echo 'Deploying Backend to Kubernetes using Ansible...'
+                script {
+                    // Run Ansible playbook to deploy backend
+                    sh 'ansible-playbook -i ansible/inventory.ini ansible/playbook.yml --extra-vars "deployment=backend"'
+                }
+            }
+        }
+
+        // Deploy Frontend to Kubernetes using Ansible
         stage('Deploy Frontend to Kubernetes') {
             steps {
-                echo 'Deploying Frontend to Kubernetes...'
+                echo 'Deploying Frontend to Kubernetes using Ansible...'
                 script {
-                    // Apply frontend Kubernetes manifest
-                    sh 'kubectl apply -f k8s/deployment/frontend-deployment.yml'
-                    
-                    // Rollout status for frontend deployment
-                    sh 'kubectl rollout status deployment/frontend-deployment'
+                    // Run Ansible playbook to deploy frontend
+                    sh 'ansible-playbook -i ansible/inventory.ini ansible/playbook.yml --extra-vars "deployment=frontend"'
                 }
             }
-        }
-
-        // Post-deployment checks (Optional)
-        stage('Verify Deployment') {
-            steps {
-                echo 'Verifying deployment...'
-                script {
-                    // Check the status of all pods
-                    sh 'kubectl get pods'
-                    // Optional: Check services
-                    sh 'kubectl get services'
-                }
-            }
-        }
-    }
-
-    post {
-        always {
-            echo 'Pipeline finished.'
-        }
-        success {
-            echo 'Deployment succeeded!'
-        }
-        failure {
-            echo 'Pipeline failed.'
         }
     }
 }
