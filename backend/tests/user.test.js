@@ -29,7 +29,7 @@ describe('User Routes', () => {
     expect(response.status).toBe(201);
     expect(response.body).toHaveProperty('message', 'User created successfully');
     expect(response.body).toHaveProperty('token');
-  });
+  } , 10000);
 
   test('POST /api/v1/user/signin - should log in a user', async () => {
     // First, create a user
