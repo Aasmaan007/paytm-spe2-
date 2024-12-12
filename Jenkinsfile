@@ -16,6 +16,20 @@ pipeline {
             }
         }
 
+        // Remove existing images (if any) with names aasmaan1/backend and aasmaan1/frontend
+        stage('Remove Existing Docker Images') {
+            steps {
+                echo 'Removing existing Docker images if any...'
+                script {
+                    // Remove frontend image by name
+                    sh 'docker rmi -f aasmaan1/frontend || true'
+
+                    // Remove backend image by name
+                    sh 'docker rmi -f aasmaan1/backend || true'
+                }
+            }
+        }
+
         // Build Docker image for the backend
         stage('Build Backend Docker Image') {
             steps {
@@ -65,7 +79,13 @@ pipeline {
             steps {
                 echo 'Deploying Frontend and Backend to Kubernetes...'
                 script {
-                    sh 'ansible-playbook -i ansible/inventory.ini ansible/playbook.yml'
+                    // Write the Vault password to a temporary file
+                    writeFile file: '/tmp/vault_password.txt', text: "${env.VAULT_PASSWORD}"
+
+                    // Run Ansible playbook with the temporary Vault password file
+                    sh '''
+                    ansible-playbook -i ansible/inventory.ini ansible/playbook.yml --vault-password-file /tmp/vault_password.txt
+                    '''
                 }
             }
         }
