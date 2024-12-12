@@ -33,6 +33,7 @@ describe('User Routes', () => {
 
   test('POST /api/v1/user/signin - should log in a user', async () => {
     // First, create a user
+    // ingfpiwngp
     await User.create({
       username: 'testuser@example.com',
       firstName: 'Test',
