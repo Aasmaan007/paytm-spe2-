@@ -1,0 +1,16 @@
+{"filter":"","level":"info","message":"Bulk users retrieved","timestamp":"2024-12-14T14:34:46.408Z","userCount":4}
+{"level":"info","message":"User retrieved successfully","timestamp":"2024-12-14T14:34:46.426Z","userId":"675d94c930beaf91c8b5d688"}
+{"balance":696.5329218108199,"level":"info","message":"Account balance retrieved","timestamp":"2024-12-14T14:34:46.670Z","userId":"675d94c930beaf91c8b5d688"}
+{"errors":["Password too short. Minimum length is 6 characters"],"level":"warn","message":"Validation error during signup","timestamp":"2024-12-14T14:35:05.285Z"}
+{"level":"info","message":"User created successfully","timestamp":"2024-12-14T14:36:13.989Z","userId":"675d97dd637754aa712a7f22","username":"abcd@gmail.com"}
+{"filter":"","level":"info","message":"Bulk users retrieved","timestamp":"2024-12-14T14:36:14.060Z","userCount":5}
+{"balance":6446.376288425288,"level":"info","message":"Account balance retrieved","timestamp":"2024-12-14T14:36:14.064Z","userId":"675d97dd637754aa712a7f22"}
+{"level":"info","message":"User retrieved successfully","timestamp":"2024-12-14T14:36:14.067Z","userId":"675d97dd637754aa712a7f22"}
+{"level":"info","message":"User created successfully","timestamp":"2024-12-14T14:36:43.525Z","userId":"675d97fb637754aa712a7f2a","username":"darshit@gmail.com"}
+{"filter":"","level":"info","message":"Bulk users retrieved","timestamp":"2024-12-14T14:36:43.610Z","userCount":6}
+{"balance":9812.602180459471,"level":"info","message":"Account balance retrieved","timestamp":"2024-12-14T14:36:43.615Z","userId":"675d97fb637754aa712a7f2a"}
+{"level":"info","message":"User retrieved successfully","timestamp":"2024-12-14T14:36:43.613Z","userId":"675d97fb637754aa712a7f2a"}
+{"amount":"12","fromUserId":"675d97fb637754aa712a7f2a","level":"info","message":"Transfer successful","timestamp":"2024-12-14T14:36:55.151Z","toUserId":"675d94c930beaf91c8b5d688"}
+{"filter":"","level":"info","message":"Bulk users retrieved","timestamp":"2024-12-14T14:37:00.234Z","userCount":6}
+{"balance":9800.602180459471,"level":"info","message":"Account balance retrieved","timestamp":"2024-12-14T14:37:00.238Z","userId":"675d97fb637754aa712a7f2a"}
+{"level":"info","message":"User retrieved successfully","timestamp":"2024-12-14T14:37:00.236Z","userId":"675d97fb637754aa712a7f2a"}
