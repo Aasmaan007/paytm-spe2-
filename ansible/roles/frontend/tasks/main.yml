@@ -1,5 +1,5 @@
 ---
 - name: Apply Frontend Kubernetes deployment manifest
   shell: |
-    kubectl apply -f /home/aasmaan/Desktop/WebDevH/paytmk8/k8s/deployment/frontend-deployment.yml
+    kubectl apply -f /home/aasmaan/Desktop/WebDevH/paytmk8/k8s/deployment/frontend-deployment.yml --kubeconfig /home/aasmaan/Desktop/WebDevH/paytmk8/k8s/kubectl-config
     kubectl rollout status deployment/frontend-deployment --kubeconfig /home/aasmaan/Desktop/WebDevH/paytmk8/k8s/kubectl-config
