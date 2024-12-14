@@ -34,25 +34,13 @@ pipeline {
             }
         }
 
-        stage('Build Backend Docker Image in Minikube') {
+        stage('Build Images with Docker Compose') {
             steps {
-                echo 'Building Backend Docker image in Minikube...'
+                echo 'Building images using Docker Compose in Minikube environment...'
                 script {
                     sh '''
                     eval $(minikube docker-env)
-                    docker build -t aasmaan1/backend:latest ./backend
-                    '''
-                }
-            }
-        }
-
-        stage('Build Frontend Docker Image in Minikube') {
-            steps {
-                echo 'Building Frontend Docker image in Minikube...'
-                script {
-                    sh '''
-                    eval $(minikube docker-env)
-                    docker build -t aasmaan1/frontend:latest ./frontend
+                    docker-compose build
                     '''
                 }
             }

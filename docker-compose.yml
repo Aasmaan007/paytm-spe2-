@@ -1,14 +1,12 @@
-version: '3.8'
+version: '3.9'
 
 services:
   backend:
     build:
       context: ./backend
-      dockerfile: Dockerfile
     image: aasmaan1/backend:latest
 
   frontend:
     build:
       context: ./frontend
-      dockerfile: Dockerfile
     image: aasmaan1/frontend:latest
