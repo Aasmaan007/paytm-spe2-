@@ -15,6 +15,22 @@ pipeline {
                 git branch: 'spek8', url: 'https://github.com/Aasmaan007/paytm-spe2-.git'
             }
         }
+        
+        // stage('Testing') {
+        //     steps {
+        //         echo 'Running tests...'
+        //         script {
+        //             // Navigate to the backend directory
+        //             dir('backend') {
+        //                 // Install dependencies
+        //                 sh 'npm install'
+
+        //                 // Run tests
+        //                 sh 'npm test'
+        //             }
+        //         }
+        //     }
+        // }
 
         // Remove existing images (if any) with names aasmaan1/backend and aasmaan1/frontend
         stage('Remove Existing Docker Images') {
@@ -41,16 +57,16 @@ pipeline {
         }
 
         // Push Backend Docker image to Docker Hub
-        stage('Push Backend Docker Image') {
-            steps {
-                echo 'Pushing Backend Docker image to Docker Hub...'
-                script {
-                    docker.withRegistry('', 'DockerHubCred') {
-                        backend_image.push()
-                    }
-                }
-            }
-        }
+        // stage('Push Backend Docker Image') {
+        //     steps {
+        //         echo 'Pushing Backend Docker image to Docker Hub...'
+        //         script {
+        //             docker.withRegistry('', 'DockerHubCred') {
+        //                 backend_image.push()
+        //             }
+        //         }
+        //     }
+        // }
 
         // Build Docker image for the frontend and pass backend URL at build time
         stage('Build Frontend Docker Image') {
@@ -63,17 +79,17 @@ pipeline {
         }
 
         // Push Frontend Docker image to Docker Hub
-        stage('Push Frontend Docker Image') {
-            steps {
-                echo 'Pushing Frontend Docker image to Docker Hub...'
-                script {
-                    docker.withRegistry('', 'DockerHubCred') {
-                        frontend_image.push()
-                    }
-                }
-            }
-        }
-
+        // stage('Push Frontend Docker Image') {
+        //     steps {
+        //         echo 'Pushing Frontend Docker image to Docker Hub...'
+        //         script {
+        //             docker.withRegistry('', 'DockerHubCred') {
+        //                 frontend_image.push()
+        //             }
+        //         }
+        //     }
+        // }
+// 
         // Deploy both Frontend and Backend to Kubernetes using Ansible playbook
         stage('Deploy to Kubernetes') {
             steps {
