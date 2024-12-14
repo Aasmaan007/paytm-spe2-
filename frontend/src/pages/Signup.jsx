@@ -61,7 +61,7 @@ export const Signup = () => {
             <Button
               onClick={async () => {
                 console.log("REACT_APP_FEATURE:", process.env.REACT_APP_FEATURE);
-                const backendurl = import.meta.env.REACT_APP_BACKEND_URL || "http://192.168.49.2:30847";  // Use environment variable or fallback
+                const backendurl = import.meta.env.REACT_APP_BACKEND_URL || "http://192.168.49.2:31720";  // Use environment variable or fallback
                 console.log(backendurl)
                 const response = await axios.post(
                   backendurl + "/api/v1/user/signup",
