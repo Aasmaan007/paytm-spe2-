@@ -1,11 +1,17 @@
 pipeline {
-    environment {
-        VAULT_PASSWORD = 'aasmaan'
-        KUBECONFIG = './k8s/kubectl-config'
-        MINIKUBE_IP = '192.168.49.2'
-    }
-
     agent any
+    environment {
+        // Original environment variables
+        VAULT_PASSWORD = 'aasmaan' // Jenkins secret for the Ansible vault password
+        KUBECONFIG = './k8s/kubectl-config' // Path to Kubernetes kubeconfig file
+        MINIKUBE_IP = '192.168.49.2' // Hardcoded Minikube IP
+        
+        // Minikube Docker environment variables
+        DOCKER_TLS_VERIFY = "1"
+        DOCKER_HOST = "tcp://192.168.49.2:2376" // Replace with your Minikube Docker host
+        DOCKER_CERT_PATH = "/home/aasmaan/.minikube/certs" // Replace with your cert path
+        MINIKUBE_ACTIVE_DOCKERD = "minikube"
+    }
 
     stages {
         stage('Clone Repository') {
@@ -17,10 +23,13 @@ pipeline {
 
         stage('Remove Existing Docker Images') {
             steps {
-                echo 'Removing existing Docker images if any...'
+                echo 'Removing existing Docker images inside Minikube Docker...'
                 script {
-                    sh 'docker rmi -f aasmaan1/frontend || true'
-                    sh 'docker rmi -f aasmaan1/backend || true'
+                    sh '''
+                    eval $(minikube docker-env)
+                    docker rmi -f aasmaan1/frontend:latest || true
+                    docker rmi -f aasmaan1/backend:latest || true
+                    '''
                 }
             }
         }
@@ -29,8 +38,10 @@ pipeline {
             steps {
                 echo 'Building Backend Docker image in Minikube...'
                 script {
-                    sh 'eval $(minikube docker-env)'
-                    backend_image = docker.build("aasmaan1/backend:latest", "./backend")
+                    sh '''
+                    eval $(minikube docker-env)
+                    docker build -t aasmaan1/backend:latest ./backend
+                    '''
                 }
             }
         }
@@ -39,8 +50,10 @@ pipeline {
             steps {
                 echo 'Building Frontend Docker image in Minikube...'
                 script {
-                    sh 'eval $(minikube docker-env)'
-                    frontend_image = docker.build("aasmaan1/frontend:latest", "./frontend")
+                    sh '''
+                    eval $(minikube docker-env)
+                    docker build -t aasmaan1/frontend:latest ./frontend
+                    '''
                 }
             }
         }
@@ -51,6 +64,7 @@ pipeline {
                 script {
                     writeFile file: '/tmp/vault_password.txt', text: "${env.VAULT_PASSWORD}"
                     sh '''
+                    eval $(minikube docker-env)
                     ansible-playbook -i ansible/inventory.ini ansible/playbook.yml --vault-password-file /tmp/vault_password.txt
                     '''
                 }
