@@ -1,5 +1,6 @@
 # Use Node.js LTS base image
-FROM node:16
+FROM node:16-slim
+
 
 # Set the working directory inside the container
 WORKDIR /app
