@@ -45,6 +45,7 @@ const updateBody = zod.object({
 
 // Signup Route
 router.post("/signup", async (req, res) => {
+    console.log("issuesignup")
     try {
         const result = signupBody.safeParse(req.body);
         if (!result.success) {

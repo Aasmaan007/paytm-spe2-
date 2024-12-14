@@ -7,11 +7,12 @@ const authMiddleware = (req, res, next) => {
     
     // Check if the Authorization header exists and starts with "Bearer"
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
+        // console.log("111")
         return res.status(401).json({
             message: "Authorization header missing or invalid"
         }); // 401 Unauthorized: Token missing or not in proper format
     }
-
+    // console.log("222")
     // Extract the token from the Authorization header
     const token = authHeader.split(' ')[1];
 
@@ -21,6 +22,7 @@ const authMiddleware = (req, res, next) => {
 
         // Ensure the token contains a userId
         if (!decoded.userId) {
+
             return res.status(403).json({
                 message: "Invalid token: userId not found"
             }); // 403 Forbidden: Token invalid but present
