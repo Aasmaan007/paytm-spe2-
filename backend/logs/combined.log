@@ -1,31 +1,19 @@
-{"filter":"","level":"info","message":"Bulk users retrieved","timestamp":"2024-12-14T14:34:46.408Z","userCount":4}
-{"level":"info","message":"User retrieved successfully","timestamp":"2024-12-14T14:34:46.426Z","userId":"675d94c930beaf91c8b5d688"}
-{"balance":696.5329218108199,"level":"info","message":"Account balance retrieved","timestamp":"2024-12-14T14:34:46.670Z","userId":"675d94c930beaf91c8b5d688"}
-{"errors":["Password too short. Minimum length is 6 characters"],"level":"warn","message":"Validation error during signup","timestamp":"2024-12-14T14:35:05.285Z"}
-{"level":"info","message":"User created successfully","timestamp":"2024-12-14T14:36:13.989Z","userId":"675d97dd637754aa712a7f22","username":"abcd@gmail.com"}
-{"filter":"","level":"info","message":"Bulk users retrieved","timestamp":"2024-12-14T14:36:14.060Z","userCount":5}
-{"balance":6446.376288425288,"level":"info","message":"Account balance retrieved","timestamp":"2024-12-14T14:36:14.064Z","userId":"675d97dd637754aa712a7f22"}
-{"level":"info","message":"User retrieved successfully","timestamp":"2024-12-14T14:36:14.067Z","userId":"675d97dd637754aa712a7f22"}
-{"level":"info","message":"User created successfully","timestamp":"2024-12-14T14:36:43.525Z","userId":"675d97fb637754aa712a7f2a","username":"darshit@gmail.com"}
-{"filter":"","level":"info","message":"Bulk users retrieved","timestamp":"2024-12-14T14:36:43.610Z","userCount":6}
-{"balance":9812.602180459471,"level":"info","message":"Account balance retrieved","timestamp":"2024-12-14T14:36:43.615Z","userId":"675d97fb637754aa712a7f2a"}
-{"level":"info","message":"User retrieved successfully","timestamp":"2024-12-14T14:36:43.613Z","userId":"675d97fb637754aa712a7f2a"}
-{"amount":"12","fromUserId":"675d97fb637754aa712a7f2a","level":"info","message":"Transfer successful","timestamp":"2024-12-14T14:36:55.151Z","toUserId":"675d94c930beaf91c8b5d688"}
-{"filter":"","level":"info","message":"Bulk users retrieved","timestamp":"2024-12-14T14:37:00.234Z","userCount":6}
-{"balance":9800.602180459471,"level":"info","message":"Account balance retrieved","timestamp":"2024-12-14T14:37:00.238Z","userId":"675d97fb637754aa712a7f2a"}
-{"level":"info","message":"User retrieved successfully","timestamp":"2024-12-14T14:37:00.236Z","userId":"675d97fb637754aa712a7f2a"}
-{"level":"info","message":"User retrieved successfully","timestamp":"2024-12-14T15:19:58.154Z","userId":"675d97fb637754aa712a7f2a"}
-{"balance":9800.602180459471,"level":"info","message":"Account balance retrieved","timestamp":"2024-12-14T15:19:58.157Z","userId":"675d97fb637754aa712a7f2a"}
-{"filter":"","level":"info","message":"Bulk users retrieved","timestamp":"2024-12-14T15:19:58.156Z","userCount":6}
-{"level":"info","message":"User created successfully","timestamp":"2024-12-14T15:20:29.198Z","userId":"675da23c637754aa712a7f3c","username":"aasmaan1@gmail.com"}
-{"balance":9186.588010800506,"level":"info","message":"Account balance retrieved","timestamp":"2024-12-14T15:20:29.262Z","userId":"675da23c637754aa712a7f3c"}
-{"level":"info","message":"User retrieved successfully","timestamp":"2024-12-14T15:20:29.264Z","userId":"675da23c637754aa712a7f3c"}
-{"filter":"","level":"info","message":"Bulk users retrieved","timestamp":"2024-12-14T15:20:29.266Z","userCount":7}
-{"amount":"900","fromUserId":"675da23c637754aa712a7f3c","level":"info","message":"Transfer successful","timestamp":"2024-12-14T15:20:48.785Z","toUserId":"675d97fb637754aa712a7f2a"}
-{"balance":8286.588010800506,"level":"info","message":"Account balance retrieved","timestamp":"2024-12-14T15:20:53.867Z","userId":"675da23c637754aa712a7f3c"}
-{"filter":"","level":"info","message":"Bulk users retrieved","timestamp":"2024-12-14T15:20:53.869Z","userCount":7}
-{"level":"info","message":"User retrieved successfully","timestamp":"2024-12-14T15:20:53.871Z","userId":"675da23c637754aa712a7f3c"}
-{"amount":"1000","fromUserId":"675da23c637754aa712a7f3c","level":"info","message":"Transfer successful","timestamp":"2024-12-14T15:22:11.470Z","toUserId":"675d7ecff873d5da2aef5a16"}
-{"balance":7286.588010800506,"level":"info","message":"Account balance retrieved","timestamp":"2024-12-14T15:22:16.526Z","userId":"675da23c637754aa712a7f3c"}
-{"level":"info","message":"User retrieved successfully","timestamp":"2024-12-14T15:22:16.528Z","userId":"675da23c637754aa712a7f3c"}
-{"filter":"","level":"info","message":"Bulk users retrieved","timestamp":"2024-12-14T15:22:16.532Z","userCount":7}
+{"filter":"","level":"info","message":"Bulk users retrieved","timestamp":"2024-12-15T04:32:17.976Z","userCount":2}
+{"level":"info","message":"User retrieved successfully","timestamp":"2024-12-15T04:32:17.982Z","userId":"675dc45df42fd9c28c8071fe"}
+{"balance":8412.45384243721,"level":"info","message":"Account balance retrieved","timestamp":"2024-12-15T04:32:18.213Z","userId":"675dc45df42fd9c28c8071fe"}
+{"level":"info","message":"User created successfully","timestamp":"2024-12-15T04:33:04.187Z","userId":"675e5c0072b2e37bb6c6417f","username":"yuvraj@gmail.com"}
+{"balance":3141.8560827689034,"level":"info","message":"Account balance retrieved","timestamp":"2024-12-15T04:33:04.254Z","userId":"675e5c0072b2e37bb6c6417f"}
+{"filter":"","level":"info","message":"Bulk users retrieved","timestamp":"2024-12-15T04:33:04.259Z","userCount":3}
+{"level":"info","message":"User retrieved successfully","timestamp":"2024-12-15T04:33:04.263Z","userId":"675e5c0072b2e37bb6c6417f"}
+{"level":"info","message":"User created successfully","timestamp":"2024-12-15T04:34:48.517Z","userId":"675e5c6872b2e37bb6c64187","username":"super@gmail.com"}
+{"balance":9597.82391744347,"level":"info","message":"Account balance retrieved","timestamp":"2024-12-15T04:34:48.604Z","userId":"675e5c6872b2e37bb6c64187"}
+{"filter":"","level":"info","message":"Bulk users retrieved","timestamp":"2024-12-15T04:34:48.609Z","userCount":4}
+{"level":"info","message":"User retrieved successfully","timestamp":"2024-12-15T04:34:48.611Z","userId":"675e5c6872b2e37bb6c64187"}
+{"amount":"100","fromUserId":"675e5c6872b2e37bb6c64187","level":"info","message":"Transfer successful","timestamp":"2024-12-15T04:35:00.841Z","toUserId":"675dc45df42fd9c28c8071fe"}
+{"balance":9497.82391744347,"level":"info","message":"Account balance retrieved","timestamp":"2024-12-15T04:35:05.916Z","userId":"675e5c6872b2e37bb6c64187"}
+{"level":"info","message":"User retrieved successfully","timestamp":"2024-12-15T04:35:05.919Z","userId":"675e5c6872b2e37bb6c64187"}
+{"filter":"","level":"info","message":"Bulk users retrieved","timestamp":"2024-12-15T04:35:05.922Z","userCount":4}
+{"amount":"4000","fromUserId":"675e5c6872b2e37bb6c64187","level":"info","message":"Transfer successful","timestamp":"2024-12-15T04:35:50.304Z","toUserId":"675e5c0072b2e37bb6c6417f"}
+{"balance":5497.823917443469,"level":"info","message":"Account balance retrieved","timestamp":"2024-12-15T04:35:55.364Z","userId":"675e5c6872b2e37bb6c64187"}
+{"level":"info","message":"User retrieved successfully","timestamp":"2024-12-15T04:35:55.368Z","userId":"675e5c6872b2e37bb6c64187"}
+{"filter":"","level":"info","message":"Bulk users retrieved","timestamp":"2024-12-15T04:35:55.371Z","userCount":4}
